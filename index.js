@@ -49,7 +49,7 @@ async function wget(wgetUrl) {
   try {
     const fetchResponse = await fetch(wgetUrl);
     if (fetchResponse.status !== 200) {
-      throw new Error("Invalid response " + res.status);
+      throw new Error("Invalid response " + fetchResponse.status);
     }
   
     await fetchResponse.text();
