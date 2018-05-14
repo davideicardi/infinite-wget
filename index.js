@@ -46,12 +46,18 @@ function sleep(ms) {
 }
 
 async function wget(wgetUrl) {
-  const fetchResponse = await fetch(wgetUrl);
-  if (fetchResponse.status !== 200) {
-    throw new Error("Invalid response " + res.status);
+  try {
+    const fetchResponse = await fetch(wgetUrl);
+    if (fetchResponse.status !== 200) {
+      throw new Error("Invalid response " + res.status);
+    }
+  
+    await fetchResponse.text();
+ 
+  } catch (err) {
+    console.error(err);
+    throw err;
   }
-
-  await fetchResponse.text();
 }
 
 async function runTask(wgetUrl, options) {
@@ -81,5 +87,7 @@ run(cli.input[0], cli.flags)
 
 process.on('SIGINT', function() {
   progress.end();
+  console.log(progress.errors);
+
   process.exit();
 });
