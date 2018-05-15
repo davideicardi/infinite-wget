@@ -87,7 +87,9 @@ run(cli.input[0], cli.flags)
 
 process.on('SIGINT', function() {
   progress.end();
-  console.log(progress.errors);
+  for (const err of progress.errors) {
+    console.log(err);
+  }
 
   process.exit();
 });
