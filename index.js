@@ -94,9 +94,16 @@ function wget(wgetUrl, fetchOptions, logResponse) {
 }
 function runTask(wgetUrl, options) {
     return __awaiter(this, void 0, void 0, function* () {
+        const headers = {};
+        for (const h of options.headers) {
+            const hK = h.split("=")[0];
+            const hv = h.split("=")[1] || "";
+            headers[hK] = hv;
+        }
         const fetchOptions = {
             method: options.method,
-            body: options.body
+            body: options.body,
+            headers
         };
         while (true) {
             yield progress.incrementPromise(wget(wgetUrl, fetchOptions, options.logResponse));
@@ -120,13 +127,20 @@ function run(wgetUrl, options) {
             throw new Error("Invalid parallelism parameter");
         }
         const pBody = options.body && fs_1.default.readFileSync(options.body);
-        console.log("Headers", options.header);
+        let pHeaders = [];
+        if (Array.isArray(options.header)) {
+            pHeaders = options.header;
+        }
+        else if (options.header) {
+            pHeaders = [options.header];
+        }
         const optionsParser = {
             sleep: pSleep,
             parallelism: pParallelism,
             method: options.method,
             logResponse: options.logResponse,
-            body: pBody
+            body: pBody,
+            headers: pHeaders
         };
         const tasks = Array.from(Array(optionsParser.parallelism))
             .map(() => runTask(wgetUrl, optionsParser));

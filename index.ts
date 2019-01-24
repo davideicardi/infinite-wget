@@ -68,6 +68,7 @@ interface MyOptions {
   method: string;
   logResponse: boolean;
   body?: Buffer;
+  headers: string[];
 }
 
 function sleep(ms: number) {
@@ -96,9 +97,17 @@ async function wget(wgetUrl: string, fetchOptions: RequestInit, logResponse: boo
 
 async function runTask(wgetUrl: string, options: MyOptions) {
 
+  const headers: { [index: string]: string } = {};
+  for (const h of options.headers) {
+    const hK = h.split("=")[0];
+    const hv = h.split("=")[1] || "";
+    headers[hK] = hv;
+  }
+
   const fetchOptions: RequestInit = {
     method: options.method,
-    body: options.body
+    body: options.body,
+    headers
   };
 
   while (true) {
@@ -125,14 +134,20 @@ async function run(wgetUrl: string, options: any) {
   }
   const pBody = options.body && fs.readFileSync(options.body);
 
-  console.log("Headers", options.header);
+  let pHeaders = [];
+  if (Array.isArray(options.header)) {
+    pHeaders = options.header;
+  } else if (options.header) {
+    pHeaders = [options.header];
+  }
 
   const optionsParser: MyOptions = {
     sleep: pSleep,
     parallelism: pParallelism,
     method: options.method,
     logResponse: options.logResponse,
-    body: pBody
+    body: pBody,
+    headers: pHeaders
   };
 
   const tasks = Array.from(Array(optionsParser.parallelism))
