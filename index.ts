@@ -19,7 +19,8 @@ const cli = meow(`
     --sleep, -s  Sleep ms, default 0
     --method, -m  HTTP method, default GET
     --logResponse, -l Log HTTP response, default false
-    --body, -b Body to send, default ""
+    --body, -b Body to send, default to no body
+    --header, -h Headers in form "key=value", default to no headers
 
 	Examples
 	  $ infinite-wget http://httpbin.org/get -p 2
@@ -51,6 +52,11 @@ const cli = meow(`
     body: {
       type: 'string',
       alias: 'b',
+      default: undefined
+    },
+    header: {
+      type: 'string',
+      alias: 'h',
       default: ''
     }
 	}
@@ -118,6 +124,8 @@ async function run(wgetUrl: string, options: any) {
     throw new Error("Invalid parallelism parameter");
   }
   const pBody = options.body && fs.readFileSync(options.body);
+
+  console.log("Headers", options.header);
 
   const optionsParser: MyOptions = {
     sleep: pSleep,
