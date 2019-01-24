@@ -1,14 +1,24 @@
 {
   "name": "infinite-wget",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A super simple HTTP client for performance tests",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "categories": ["Other"],
-  "keywords": [ "http", "performance", "wget", "latency" ],
-  "repository": {"type": "git", "url": "git@github.com:davideicardi/infinite-wget.git"},
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "http",
+    "performance",
+    "wget",
+    "latency"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:davideicardi/infinite-wget.git"
+  },
   "homepage": "https://github.com/davideicardi/infinite-wget",
   "author": "Davide Icardi",
   "license": "ISC",
