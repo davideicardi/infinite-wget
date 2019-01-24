@@ -1,6 +1,8 @@
 # infinite-wget
 
-A stupid HTTP performance test client that perform infinite GET on a given url (until CTRL+C is pressed...).
+[![npm version](https://badge.fury.io/js/infinite-wget.svg)](https://badge.fury.io/js/infinite-wget)
+
+A super simple HTTP client for performance test. It performs infinite HTTP calls on a given url until CTRL+C is pressed...
 
     > infinite-wget http://httpbin.org/get
     infinite-wget started at 2018-05-15T08:08:46.839Z
@@ -20,3 +22,8 @@ A stupid HTTP performance test client that perform infinite GET on a given url (
 See available options using
 
     infinite-wget --help
+
+## Available options
+
+- `sleep`, `s`: specify the number of milliseconds to wait between each call, default 0.
+- `parallelism`, `p`: number of concurrent calls to perform, default 1.

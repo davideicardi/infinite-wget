@@ -9,11 +9,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^10.12.18",
+    "@types/node-fetch": "^2.1.4",
     "meow": "^5.0.0",
-    "node-fetch": "^2.1.2",
+    "node-fetch": "^2.3.0",
     "progress-logger-js": "^0.5.0"
   },
   "bin": {
     "infinite-wget": "./index.js"
+  },
+  "devDependencies": {
+    "typescript": "^3.2.4"
   }
 }
