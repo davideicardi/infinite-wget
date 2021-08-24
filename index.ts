@@ -3,7 +3,7 @@
 import {ProgressLogger} from "progress-logger-js";
 import fetch, { RequestInit } from "node-fetch";
 import fs from "fs";
-const meow = require("meow");
+import meow from "meow";
 
 const progress = new ProgressLogger({
   label: "infinite-wget",
@@ -27,7 +27,7 @@ const cli = meow(`
 	  $ infinite-wget http://httpbin.org/post -l -m POST -b ./my-body.txt
 `,
 {
-
+  importMeta: import.meta,
 	flags: {
     parallelism: {
 			type: 'string',
@@ -52,7 +52,7 @@ const cli = meow(`
     body: {
       type: 'string',
       alias: 'b',
-      default: undefined
+      isRequired: false
     },
     header: {
       type: 'string',
