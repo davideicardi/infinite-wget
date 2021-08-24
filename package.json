@@ -4,6 +4,7 @@
   "description": "A super simple HTTP client for performance tests",
   "main": "index.js",
   "scripts": {
+    "src-build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "categories": [
@@ -23,16 +24,16 @@
   "author": "Davide Icardi",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^10.12.18",
-    "@types/node-fetch": "^2.1.4",
-    "meow": "^5.0.0",
-    "node-fetch": "^2.3.0",
-    "progress-logger-js": "^0.5.0"
+    "@types/node": "^16.7.1",
+    "@types/node-fetch": "^2.5.12",
+    "meow": "^10.1.1",
+    "node-fetch": "^2.6.1",
+    "progress-logger-js": "^0.5.1"
   },
   "bin": {
     "infinite-wget": "./index.js"
   },
   "devDependencies": {
-    "typescript": "^3.2.4"
+    "typescript": "^4.3.5"
   }
 }
